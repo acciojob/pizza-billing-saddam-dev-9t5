@@ -6,6 +6,8 @@ public class Pizza {
     private Boolean isVeg;
     private String bill;
 
+    public boolean isDeluxe = false;
+
     public boolean extraCheese = false;
     public boolean extraTopping = false;
     public boolean isTakeaway = false;
@@ -19,11 +21,15 @@ public class Pizza {
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
         // your code goes here
-        this.price = (isVeg) ? 300 : 400;
+        this.price = (isVeg) ? vegPizzaPrice : nonVegPizzaPrice;
     }
 
     public int getPrice(){
         return this.price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Boolean getVeg() {
@@ -32,16 +38,43 @@ public class Pizza {
 
     public void addExtraCheese(){
         // your code goes here
+        if(!extraCheese) {
+            int getCurrentPrice = this.getPrice();
+            this.setPrice(getCurrentPrice+extraCheesePrice);
+        }
         this.extraCheese = true;
+    }
+
+    public void addExtraCheese(Boolean isDeluxe){
+        this.isDeluxe = true;
+        int getCurrentPrice = this.getPrice();
+        getCurrentPrice += extraCheesePrice;
+        this.setPrice(getCurrentPrice);
     }
 
     public void addExtraToppings(){
         // your code goes here
+        if(!extraTopping) {
+            int getCurrentPrice = this.getPrice();
+            getCurrentPrice += (isVeg) ? extraVegToppingPrice : extraNonVegToppingPrice;
+            this.setPrice(getCurrentPrice);
+        }
         this.extraTopping = true;
+    }
+
+    public void addExtraToppings(boolean isDeluxe){
+        this.isDeluxe = true;
+        int getCurrentPrice = this.getPrice();
+        getCurrentPrice += (isVeg) ? extraVegToppingPrice : extraNonVegToppingPrice;
+        this.setPrice(getCurrentPrice);
     }
 
     public void addTakeaway(){
         // your code goes here
+        if(!isTakeaway) {
+            int getCurrentPrice = this.getPrice();
+            this.setPrice(getCurrentPrice+paperBagPrice);
+        }
         this.isTakeaway = true;
     }
 
@@ -49,14 +82,14 @@ public class Pizza {
         // your code goes here
         String billStatement = "";
         int totalBill = 0;
+        int basePrice = this.getPrice();
         if(isVeg) {
-            billStatement += "Base Price Of The Pizza: " + vegPizzaPrice + "\n";
-            totalBill += vegPizzaPrice;
+            basePrice = (isDeluxe) ? (vegPizzaPrice+extraCheesePrice+extraVegToppingPrice) : vegPizzaPrice;
+        }else {
+            basePrice = (isDeluxe) ? (nonVegPizzaPrice+extraCheesePrice+extraNonVegToppingPrice) : nonVegPizzaPrice;
         }
-        else {
-            billStatement += "Base Price Of The Pizza: " +nonVegPizzaPrice+ "\n";
-            totalBill += nonVegPizzaPrice;
-        }
+        billStatement += "Base Price Of The Pizza: " + basePrice + "\n";
+        totalBill += basePrice;
 
         if(extraCheese) {
             billStatement += "Extra Cheese Added: " +extraCheesePrice+ "\n";
