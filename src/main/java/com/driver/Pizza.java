@@ -50,33 +50,33 @@ public class Pizza {
         String billStatement = "";
         int totalBill = 0;
         if(isVeg) {
-            billStatement += "Base Price Of The Pizza: 300\n";
+            billStatement += "Base Price Of The Pizza: " + vegPizzaPrice + "\n";
             totalBill += vegPizzaPrice;
         }
         else {
-            billStatement += "Base Price Of The Pizza: 400\n";
+            billStatement += "Base Price Of The Pizza: " +nonVegPizzaPrice+ "\n";
             totalBill += nonVegPizzaPrice;
         }
 
         if(extraCheese) {
-            billStatement += "Extra Cheese Price: 80\n";
+            billStatement += "Extra Cheese Added: " +extraCheesePrice+ "\n";
             totalBill += extraCheesePrice;
         }
         if(extraTopping) {
             if(isVeg) {
-                billStatement += "Extra Toppings Added: 70\n";
+                billStatement += "Extra Toppings Added: " + extraVegToppingPrice + "\n";
                 totalBill += extraVegToppingPrice;
             }else {
-                billStatement += "Extra Toppings Added: 120\n";
+                billStatement += "Extra Toppings Added: " +extraNonVegToppingPrice+ "\n";
                 totalBill += extraNonVegToppingPrice;
             }
         }
         if(isTakeaway) {
-            billStatement += "Paperbag Added: 20\n";
+            billStatement += "Paperbag Added: " + paperBagPrice +"\n";
             totalBill += paperBagPrice;
         }
 
-        billStatement += "Total Price: " + totalBill;
+        billStatement += "Total Price: " + totalBill + "\n";
         this.bill = billStatement;
         return this.bill;
     }
