@@ -50,11 +50,11 @@ public class Pizza {
         String billStatement = "";
         int totalBill = 0;
         if(isVeg) {
-            billStatement += "Veg pizza base price: 300\n";
+            billStatement += "Base Price Of The Pizza: 300\n";
             totalBill += vegPizzaPrice;
         }
         else {
-            billStatement += "Non-veg pizza base price: 400\n";
+            billStatement += "Base Price Of The Pizza: 400\n";
             totalBill += nonVegPizzaPrice;
         }
 
