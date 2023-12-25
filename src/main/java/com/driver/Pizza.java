@@ -48,8 +48,7 @@ public class Pizza {
     public void addExtraCheese(Boolean isDeluxe){
         this.isDeluxe = true;
         int getCurrentPrice = this.getPrice();
-        getCurrentPrice += extraCheesePrice;
-        this.setPrice(getCurrentPrice);
+        this.setPrice(getCurrentPrice+extraCheesePrice);
     }
 
     public void addExtraToppings(){
@@ -82,12 +81,12 @@ public class Pizza {
         // your code goes here
         String billStatement = "";
         int totalBill = 0;
-        int basePrice = this.getPrice();
-        if(isVeg) {
-            basePrice = (isDeluxe) ? (vegPizzaPrice+extraCheesePrice+extraVegToppingPrice) : vegPizzaPrice;
-        }else {
-            basePrice = (isDeluxe) ? (nonVegPizzaPrice+extraCheesePrice+extraNonVegToppingPrice) : nonVegPizzaPrice;
-        }
+        int basePrice = isVeg ? vegPizzaPrice : nonVegPizzaPrice;
+//        if(isVeg) {
+//            basePrice = (isDeluxe) ? (vegPizzaPrice+extraCheesePrice+extraVegToppingPrice) : vegPizzaPrice;
+//        }else {
+//            basePrice = (isDeluxe) ? (nonVegPizzaPrice+extraCheesePrice+extraNonVegToppingPrice) : nonVegPizzaPrice;
+//        }
         billStatement += "Base Price Of The Pizza: " + basePrice + "\n";
         totalBill += basePrice;
 
